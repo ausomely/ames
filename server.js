@@ -5,7 +5,7 @@ const PORT = 3000;
 const app = express();
 const router = express.Router();
 
-app.use(express.static('./public'));
+app.use(express.static('public'));
 app.use('/', router);
 
 app.listen(PORT, () => {
@@ -14,12 +14,11 @@ app.listen(PORT, () => {
 
 /* GET Home Page */
 router.get('/', (req, res) => {
-    res.sendFile('index.html', { root: __dirname });
+    res.sendFile(__dirname + 'public/index.html');
 });
 
 let category_collection = []; 
 let center_collection = [];
-let metrics = [];
 let categories = [];
 let centers = []; 
 
@@ -47,6 +46,7 @@ router.get('/fetch_results', async (req, res) => {
                 count: categories.filter(word => word === element).length
             });
         });
+    
 
         // console.log(category_collection);
 
@@ -61,15 +61,16 @@ router.get('/fetch_results', async (req, res) => {
 
         // console.log(center_collection);
 
-        // Convert metrics into JSON Format and return it
-        metrics = [...category_collection, ...center_collection];
-        return JSON.stringify(metrics);
+        // Convert metrics into JSON and return it
+        // const metrics = category_collection.concat(center_collection).unique();
+        // console.log(metrics);
+        // return JSON.parse(metrics);
 
     })
     .catch(error => console.error(error));
-    console.log('RESPONSE: ', response);
+    // console.log('RESPONSE: ', response);
     //send response back as json
-    res.send(response); 
+    // res.send(response); 
 });
 
 
