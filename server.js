@@ -17,12 +17,13 @@ router.get('/', (req, res) => {
     res.sendFile(__dirname + 'public/index.html');
 });
 
-let category_collection = []; 
-let center_collection = [];
-let categories = [];
-let centers = []; 
+
 
 router.get('/fetch_results', async (req, res) => {
+    let category_collection = []; 
+    let center_collection = [];
+    let categories = [];
+    let centers = [];
     console.log('/fetch_results endpoint called');
     const url = 'https://technology-api.ndc.nasa.gov/api/patent';
     const options = {
@@ -62,15 +63,15 @@ router.get('/fetch_results', async (req, res) => {
         // console.log(center_collection);
 
         // Convert metrics into JSON and return it
-        // const metrics = category_collection.concat(center_collection).unique();
+        const metrics = category_collection.concat(center_collection);
         // console.log(metrics);
-        // return JSON.parse(metrics);
+        return metrics;
 
     })
     .catch(error => console.error(error));
-    // console.log('RESPONSE: ', response);
+    console.log('RESPONSE: ', response);
     //send response back as json
-    // res.send(response); 
+    res.send(response); 
 });
 
 
