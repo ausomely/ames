@@ -1,27 +1,38 @@
-const https = require('https');
+// const https = require('https');
 const express = require('express');
 const fetch = require('node-fetch');
-const port = 3000;
-
+const PORT = 3000;
+const app = express();
 const router = express.Router();
 
-// app.use(express.json());
+app.use(express.static('./public'));
+app.use('/', router);
+
+app.listen(PORT, () => {
+    console.log('The app is listening on port: ' + PORT);
+});
 
 /* GET Home Page */
 router.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile('index.html', { root: __dirname });
 });
-
 
 let category_collection = []; 
 let center_collection = [];
+let metrics = [];
 let categories = [];
 let centers = []; 
 
-fetch('https://technology-api.ndc.nasa.gov/api/patent')
-    // Convert this response to JSON, treating it as a JSON, then print it out
-    .then(res => res.json())
-    .then(res => {
+router.get('/fetch_results', async (req, res) => {
+    console.log('/fetch_results endpoint called');
+    const url = 'https://technology-api.ndc.nasa.gov/api/patent';
+    const options = {
+        'method': 'GET'
+    }; 
+
+    const response = await fetch(url, options)
+        .then(res => res.json())
+        .then(res => {
 
         for (let i = 0; i < res.results.length; i++) {
             categories.push(res.results[i][5]);
@@ -37,7 +48,7 @@ fetch('https://technology-api.ndc.nasa.gov/api/patent')
             });
         });
 
-        console.log(category_collection);
+        // console.log(category_collection);
 
         // Counters per center will be stored in centers_collection
         let unique_sorted_centers = [... new Set(centers)].sort(); 
@@ -48,19 +59,18 @@ fetch('https://technology-api.ndc.nasa.gov/api/patent')
             });
         });
 
-        console.log(center_collection);
+        // console.log(center_collection);
 
-        // Convert metrics into JSON Format
-        // let categories_json = JSON.stringify(category_collection);
-        // let centers_json = JSON.stringify(center_collection);
+        // Convert metrics into JSON Format and return it
+        metrics = [...category_collection, ...center_collection];
+        return JSON.stringify(metrics);
 
     })
     .catch(error => console.error(error));
-
-// app.post('/metrics', req, res => {
-//     console.log(req);
-// }); 
-
-router.listen(port, () => {
-    console.log('The app is listening on port: ' + port);
+    console.log('RESPONSE: ', response);
+    //send response back as json
+    res.send(response); 
 });
+
+
+module.exports = router;
