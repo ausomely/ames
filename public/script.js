@@ -1,6 +1,21 @@
 "use strict";
+
+/* CHART COLORS */ 
+const pie_colors = [
+    "rgb(0, 18, 25)",
+    "rgb(0, 95, 115)",
+    "rgb(10, 147, 150)",
+    "rgb(148, 210, 189)",
+    "rgb(233, 216, 166)",
+    "rgb(238, 155, 0)",
+    "rgb(202, 103, 2)",
+    "rgb(187, 62, 3)",
+    "rgb(174, 32, 18)",
+    "rgb(155, 34, 38)"
+];
+
 /**
- * Renders bar chart using chart.js
+ * Renders charts using chart.js
  *
  */
 setTimeout(async function renderCharts() {
@@ -68,7 +83,7 @@ setTimeout(async function renderCharts() {
             labels: chart_data.center_labels,
             datasets: [{
                 data: chart_data.num_patents_per_center,
-                backgroundColor: chart_data.colors_for_pie,
+                backgroundColor: pie_colors,
                 hoverOffset: 10
             }]
         },
@@ -116,7 +131,7 @@ async function parseDataforCharts() {
     const center_labels = [];
     const num_patents_per_center = [];
     const colors_for_bar = [];
-    const colors_for_pie = [];
+    // const colors_for_pie = [];
     objArr.forEach(element => {
         if (element.hasOwnProperty('category')) {
             catagory_lables.push(element.category);
@@ -125,9 +140,10 @@ async function parseDataforCharts() {
         } else {
             center_labels.push(element.center);
             num_patents_per_center.push(element.count);
-            colors_for_pie.push(generateRandomColors());
+            // colors_for_pie.push(generateRandomColors());
         }
     });
+    console.log(colors_for_pie);
     return { catagory_lables, num_patents_per_category, colors_for_bar,
         center_labels, num_patents_per_center, colors_for_pie };
 };
