@@ -29,7 +29,7 @@ router.get('/fetch_results', async (req, res) => {
         'method': 'GET'
     }; 
 
-    // response is the data that is routed to '/fetch_results'
+    // Response is the data that is routed to '/fetch_results'
     const response = await fetch(url, options)
         .then(res => res.json())
         .then(res => {
