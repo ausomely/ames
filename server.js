@@ -11,7 +11,7 @@ app.listen(PORT, () => {
     console.log('The app is listening on port: ' + PORT);
 });
 
-/* GET Home Page */
+// Get Home Page
 router.get('/', (req, res) => {
     res.sendFile(__dirname + 'public/index.html');
 });
@@ -29,6 +29,7 @@ router.get('/fetch_results', async (req, res) => {
         'method': 'GET'
     }; 
 
+    // response is the data that is routed to '/fetch_results'
     const response = await fetch(url, options)
         .then(res => res.json())
         .then(res => {
@@ -41,7 +42,7 @@ router.get('/fetch_results', async (req, res) => {
         // Removes any duplicates, get a unique list of categories
         let unique_sorted_categories = [... new Set(categories)].sort(); 
         unique_sorted_categories.forEach(element => {
-            // Counters per portfolio category will be stored in catergory_collection
+            // Patent count per portfolio category will be stored in catergory_collection
             // in the format { category: '' , count: '' }
             category_collection.push({
                 category : element,
@@ -51,7 +52,7 @@ router.get('/fetch_results', async (req, res) => {
         // Same logic for centers
         let unique_sorted_centers = [... new Set(centers)].sort(); 
         unique_sorted_centers.forEach(element => {
-            // Counters per center will be stored in centers_collection
+            // Patent count per center will be stored in centers_collection
             // in the format { center: '', count: '' }
             center_collection.push({
                 center : element,
@@ -59,7 +60,7 @@ router.get('/fetch_results', async (req, res) => {
             });
         });
 
-        // Convert metrics into JSON and return it
+        // Join both collections, storing the concatanation of both arrays into metrics
         const metrics = category_collection.concat(center_collection);
         return metrics;
 
@@ -67,7 +68,7 @@ router.get('/fetch_results', async (req, res) => {
     .catch(error => console.error(error));
 
     console.log('RESPONSE: ', response);
-    //send response as json
+    // Send response as JSON
     res.send(response); 
 });
 
