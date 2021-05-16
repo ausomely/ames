@@ -51,12 +51,17 @@ setTimeout(async function renderCharts() {
                 },
             },
             scales: {
-              x: {
-                stacked: true,
-              },
-              y: {
-                stacked: true
-              }
+                x: {
+                    stacked: true,
+                    ticks: {
+                        font: {
+                            size: 16
+                        }
+                    }
+                },
+                y: {
+                    stacked: true
+                }
             },
             plugins: {
                 title: {
@@ -126,12 +131,13 @@ async function parseDataforCharts() {
     const results = await fetch('/fetch_results');
     const data = await results.text();
     const objArr = JSON.parse(data);
+
     const catagory_lables = [];
     const num_patents_per_category = [];
     const center_labels = [];
     const num_patents_per_center = [];
     const colors_for_bar = [];
-    // const colors_for_pie = [];
+
     objArr.forEach(element => {
         if (element.hasOwnProperty('category')) {
             catagory_lables.push(element.category);
@@ -140,12 +146,10 @@ async function parseDataforCharts() {
         } else {
             center_labels.push(element.center);
             num_patents_per_center.push(element.count);
-            // colors_for_pie.push(generateRandomColors());
         }
     });
-    console.log(colors_for_pie);
     return { catagory_lables, num_patents_per_category, colors_for_bar,
-        center_labels, num_patents_per_center, colors_for_pie };
+        center_labels, num_patents_per_center };
 };
 
 
@@ -153,7 +157,6 @@ async function parseDataforCharts() {
  * Randomly generates rgb string
  * @returns {string} string of rgb
  */
-
 function generateRandomColors() {
     const r = Math.floor(Math.random() * 255);
     const g = Math.floor(Math.random() * 255);
