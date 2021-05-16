@@ -34,12 +34,13 @@ $ killall -9 node
 Run the command 'npm start' again after all node processes are stopped.
 
 This will run the script 'nodemon server.js' which will begin the nodejs server. To restart the server via command line at any time, simply type 'rs' followed by the enter key in the terminal. 
+
 Navigate to http://localhost:3000 to view the web application.
 
 ## Project Development and Design Choices
 
 ### Server Side (server.js)
-To initiate a GET HTTP request I used the node-fetch package that is similar to the client-side windows.fetch API. I used the fetch GET method to retrieve the NASA Patent Portfolio data. From this fetch call I reformated the data into key value pairs where keys are: category, center and the values are: count for both keys. I used serparate arrays to store all of the known categories and centers by traversing through the data set at the indexes that I needed. Then I removed duplicate categories/centers to form unique ordered sets that would give me all of the categories and centers in the data set. Next, I used the arrays that stored all dupicates and counted the occurences of each to get the respective count of every category and center in the data set. Finally, I stored this array of objects into ***metrics*** with the desired format
+To initiate a GET HTTP request I used the node-fetch package that is similar to the client-side windows.fetch API. I used the fetch GET method to retrieve the NASA Patent Portfolio data. From this fetch call I reformated the data into key value pairs where keys are: category, center and the values are: count for both keys. I used serparate arrays to store all of the known categories and centers by traversing through the data set at the indexes that I needed. Then I removed duplicate categories/centers to form ordered sets that would give me all of the unique categories and centers in the data set. Next, I used the arrays that stored all duplicates and counted the occurences of each to get the respective count of every category and center in the data set. Finally, I stored this array of objects into ***metrics*** with the desired format
 ```
     [
      { category: '', count: ''},
@@ -47,7 +48,7 @@ To initiate a GET HTTP request I used the node-fetch package that is similar to 
      { center: '', count: '' }
     ]
 ```
-I then use express's routing and routed this response to '/fetch_results'. 
+I then used express's routing and routed this response to '/fetch_results'. 
 
 ### Client Side (script.js)
 I then retrieved this response that was routed to '/fetch_results' and parsed this data such that the data can be used to render the bar and pie charts using chart.js. From the response at '/fetch_results' I used separate arrays to store all of the category names, patent counts of each category, colors to be used to distinguish each category, center names, and patent counts of each center. I chose to choose a color pallete, found in the array ***pie_colors***, for the pie chart because there are only a small amount of centers where as I used a random color generator for the rgb colors for the bar chart because there are a larger number of category elements. 
