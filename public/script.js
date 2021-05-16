@@ -31,7 +31,7 @@ setTimeout(async function renderCharts() {
                 delay: (context) => {
                   let delay = 0;
                   if (context.type === 'data' && context.mode === 'default' && !delayed) {
-                    delay = context.dataIndex * 150 + context.datasetIndex * 100;
+                    delay = context.dataIndex * 100 + context.datasetIndex * 100;
                   }
                   return delay;
                 },
@@ -47,7 +47,14 @@ setTimeout(async function renderCharts() {
             plugins: {
                 title: {
                     display: true,
-                    text: 'The Number of Patents Per Category'
+                    text: 'The Number of Patents Per Category',
+                    padding: 20,
+                    font: {
+                        family: 'Source Serif Pro',
+                        size: 25,
+                        weight: '500'
+
+                    }
                 },
                 legend: {
                     display: false
@@ -64,14 +71,24 @@ setTimeout(async function renderCharts() {
             datasets: [{
                 data: chart_data.num_patents_per_center,
                 backgroundColor: chart_data.colors_for_pie,
-                hoverOffset: 4
+                hoverOffset: 10
             }]
         },
         options: {
+            animation: {
+                duration: 1500
+            },
             plugins: {
                 title: {
                     display: true,
-                    text: 'The Number of Patents Per NASA Center'
+                    text: 'The Number of Patents Per NASA Center',
+                    padding: 20,
+                    font: {
+                        family: 'Source Serif Pro',
+                        size: 25,
+                        weight: '500'
+
+                    }
                 },
                 legend: {
                     position: 'bottom'
@@ -80,7 +97,6 @@ setTimeout(async function renderCharts() {
         }
     });
 }, 300) // renderCharts();
-
 
 /**
  * Parses data for charts via pulling data from /fetch_results

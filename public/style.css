@@ -2,7 +2,7 @@ html, body {
     margin: 0;
     width: 100vw;
     height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .user-select-none {
@@ -18,7 +18,7 @@ html, body {
     padding: 0;
 }
 .home-title {
-    top: 5%;
+    top: 10%;
     text-align: center;
     position: relative;
     z-index: 2;
@@ -54,16 +54,11 @@ html, body {
 #myBarChart {
     position: relative;
     right: 10%;
-    animation: fade-in ease 2s;
-    animation-fill-mode: forwards;
-    -webkit-fill-mode: forwards;
-    -moz-fill-mode: forwards;
 }
 
 #myPieChart {
     position: relative;
     left: 10%;
-    
 }
 
 
