@@ -40,7 +40,7 @@ Navigate to http://localhost:3000 to view the web application.
 Disclaimer: Nodejs is a completely new environment to me and my skills in JavaScript are purely academic so the learning curve to set up the server took some time for me to understand and review what was needed. 
 
 ### Server Side (server.js)
-To handle GET HTTP requests I used the node-fetch package that is similar to the client-side windows.fetch API. I used this fetch method to retrieve the NASA Patent Portfolio data. From this fetch call I reformated the data 
+To handle GET HTTP requests I used the node-fetch package that is similar to the client-side windows.fetch API. I used this fetch method to retrieve the NASA Patent Portfolio data. From this fetch call I reformated the data into key value pairs where keys are: category, center and the values are: count. I first used serparate arrays to store all of the known categories and centers by traversing through the data set at the indexes that I needed. Then I removed duplicate categories/centers to form unique ordered sets that would give me all of the categories and centers in the data set. Next,I used the arrays that stored all dupicates and counted the occurences of each to get the respective count. Finally, I stored this array of objects into ***metrics*** with the desired format { category: '', count: ''} or { center: '', count: '' }. 
 
 
 
