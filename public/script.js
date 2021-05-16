@@ -1,5 +1,4 @@
 "use strict";
-
 /**
  * Renders bar chart using chart.js
  *
@@ -53,7 +52,6 @@ setTimeout(async function renderCharts() {
                         family: 'Source Serif Pro',
                         size: 25,
                         weight: '500'
-
                     }
                 },
                 legend: {
@@ -87,11 +85,18 @@ setTimeout(async function renderCharts() {
                         family: 'Source Serif Pro',
                         size: 25,
                         weight: '500'
-
                     }
                 },
                 legend: {
-                    position: 'bottom'
+                    position: 'right',
+                    labels: {
+                        padding: 15
+                    }
+                }
+            },
+            layout: {
+                padding: {
+                    left: 20,
                 }
             }
         }
@@ -106,7 +111,6 @@ async function parseDataforCharts() {
     const results = await fetch('/fetch_results');
     const data = await results.text();
     const objArr = JSON.parse(data);
-    // console.log(objArr);
     const catagory_lables = [];
     const num_patents_per_category = [];
     const center_labels = [];
@@ -118,8 +122,6 @@ async function parseDataforCharts() {
             catagory_lables.push(element.category);
             num_patents_per_category.push(element.count);
             colors_for_bar.push(generateRandomColors());
-
-            // console.log(element.category, element.count);
         } else {
             center_labels.push(element.center);
             num_patents_per_center.push(element.count);

@@ -17,6 +17,17 @@ html, body {
     height: 100%;
     padding: 0;
 }
+
+.bar {
+    position: relative;
+    right: 5%;
+}
+
+.pie {
+    position: relative;
+    left: 5%;
+}
+
 .home-title {
     top: 10%;
     text-align: center;
@@ -51,14 +62,10 @@ html, body {
     }
   }
 
-#myBarChart {
-    position: relative;
-    right: 10%;
+#myBarChart {  
 }
 
 #myPieChart {
-    position: relative;
-    left: 10%;
 }
 
 
