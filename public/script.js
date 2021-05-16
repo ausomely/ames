@@ -87,6 +87,7 @@ setTimeout(async function renderCharts() {
         data: {
             labels: chart_data.center_labels,
             datasets: [{
+                label: 'Patents Created at This Center',
                 data: chart_data.num_patents_per_center,
                 backgroundColor: pie_colors,
                 hoverOffset: 10
