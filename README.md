@@ -65,6 +65,8 @@ Expending most of my time continuing to learn Nodejs and new libraries, I realiz
 
 As explained in the Client Side Section, I chose to use a color pallete for the pie chart to represent the centers because there is a small amount of centers in the data set. This approach can break the code if there are new centers to be added to the data set because the ***pie_colors*** array is of finite and small size. In addition, the design choice to randomly generate the colors of each category in the bar chart can lead to inconsistencies of deployment and can impact the usability on a user to user basis. The use case for the bar chart colors is effective because the number of colors generated will correspond to the number of categories because of the way I am pushing these colors for each category as seen in the ***parseDataForCharts()*** function. However, in future implementations I would have created a more static color grading across the app to make the app more consistent. This design choice was to distinguish the elements from one another such that both charts can also be distinguishable from one another. I did not intend to make the colors distracting for the user.
 
+Finally, because of the time constraint I was also unable to develop other viewports other than the standard 1920x1080p and 2560x1440p desktop resolutions.
+
 
 
 
