@@ -59,7 +59,7 @@ The user interface of the web app integrated HTML, chart.js, Bootstrap, and ligh
 
 
 ## Limitations
-Disclaimer: Nodejs is a completely new environment I am currently learning and my skills in JavaScript are purely academic. The learning curve to set up the nodejs server took some time to understand and review what was needed. 
+Disclaimer: Nodejs is a completely new environment I am currently learning and my skills in JavaScript are purely academic. The learning curve to set up the nodejs server took some time to understand and review what was needed to complete the coding exercise as a whole. 
 
 Expending most of my time continuing to learn Nodejs and new libraries, I realized that my approach and code is naive. I used a lot of separate arrays to store elements and iterated over many of them via for loops and built in forEach functionality. I could have optimized the way I reformated the Patent Portfolio data by using different data structures such as a dictionary or map objects to organize and manipulate ***metrics***. 
 
