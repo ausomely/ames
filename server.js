@@ -42,8 +42,8 @@ router.get('/fetch_results', async (req, res) => {
         // Removes any duplicates, get a unique list of categories
         let unique_sorted_categories = [... new Set(categories)].sort(); 
         unique_sorted_categories.forEach(element => {
-            // Patent count per portfolio category will be stored in catergory_collection
-            // in the format { category: '' , count: '' }
+            // Patent count per portfolio category will be stored in 
+            // catergory_collection in the format { category: '' , count: '' }
             category_collection.push({
                 category : element,
                 count: categories.filter(word => word === element).length
@@ -60,7 +60,7 @@ router.get('/fetch_results', async (req, res) => {
             });
         });
 
-        // Join both collections, storing the concatanation of both arrays into metrics
+        // Join both collections, storing into metrics
         const metrics = category_collection.concat(center_collection);
         return metrics;
 

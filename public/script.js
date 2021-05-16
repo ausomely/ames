@@ -1,6 +1,6 @@
 "use strict";
 
-/* CHART COLORS */ 
+// Pie chart colors 
 const pie_colors = [
     "rgb(0, 18, 25)",
     "rgb(0, 95, 115)",
@@ -43,11 +43,13 @@ setTimeout(async function renderCharts() {
                   delayed = true;
                 },
                 delay: (context) => {
-                  let delay = 0;
-                  if (context.type === 'data' && context.mode === 'default' && !delayed) {
-                    delay = context.dataIndex * 100 + context.datasetIndex * 100;
-                  }
-                  return delay;
+                    let delay = 0;
+                    if (context.type === 'data' && context.mode === 'default' 
+                        && !delayed) {
+                        delay = context.dataIndex * 100 + context.datasetIndex 
+                            * 100;
+                    }
+                    return delay;
                 },
             },
             scales: {
@@ -122,7 +124,7 @@ setTimeout(async function renderCharts() {
             }
         }
     });
-}, 300) // renderCharts();
+}, 300);
 
 /**
  * Parses data for charts via pulling data from /fetch_results
@@ -139,12 +141,14 @@ async function parseDataforCharts() {
     const num_patents_per_center = [];
     const colors_for_bar = [];
 
+    // Parse data based on key
     objArr.forEach(element => {
+        // Push category, count into respective arrays
         if (element.hasOwnProperty('category')) {
             catagory_lables.push(element.category);
             num_patents_per_category.push(element.count);
             colors_for_bar.push(generateRandomColors());
-        } else {
+        } else { // Push center, count into respective arrays
             center_labels.push(element.center);
             num_patents_per_center.push(element.count);
         }
@@ -152,7 +156,6 @@ async function parseDataforCharts() {
     return { catagory_lables, num_patents_per_category, colors_for_bar,
         center_labels, num_patents_per_center };
 };
-
 
 /**
  * Randomly generates rgb string
