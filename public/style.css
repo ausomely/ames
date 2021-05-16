@@ -1,0 +1,69 @@
+html, body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+.user-select-none {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+.home-title {
+    top: 5%;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    transform: translateX(-100em);
+    animation: fade-in ease 2s, slide-up ease 1s;
+    -webkit-animation: fade-in ease 2s, slide-up ease 1s;
+    -moz-animation: fade-in ease 2s, slide-up ease 1s;
+    animation-fill-mode: forwards;
+    -webkit-fill-mode: forwards;
+    -moz-fill-mode: forwards;
+    font-family: 'Meriweather';
+    font-size: 5em;
+}
+
+@keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    0% {
+      transform: translateY(1em);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+#myBarChart {
+    position: relative;
+    right: 10%;
+    animation: fade-in ease 2s;
+    animation-fill-mode: forwards;
+    -webkit-fill-mode: forwards;
+    -moz-fill-mode: forwards;
+}
+
+#myPieChart {
+    position: relative;
+    left: 10%;
+    
+}
+
+

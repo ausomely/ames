@@ -1,17 +1,16 @@
 "use strict";
 
-renderCharts();
-
 /**
  * Renders bar chart using chart.js
- * 
+ *
  */
-async function renderCharts() {
+setTimeout(async function renderCharts() {
     const chart_data = await parseDataforCharts();
     const barCtx = document.getElementById('myBarChart');
     const pieCtx = document.getElementById('myPieChart');
 
     // Bar Chart
+    let delayed;
     const myBarChart = new Chart(barCtx, {
         type: 'bar',
         data: {
@@ -23,28 +22,70 @@ async function renderCharts() {
                 borderColor: chart_data.colors_for_bar,
                 borderWidth: 1
             }]
+        },
+        options: {
+            animation: {
+                onComplete: () => {
+                  delayed = true;
+                },
+                delay: (context) => {
+                  let delay = 0;
+                  if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                    delay = context.dataIndex * 150 + context.datasetIndex * 100;
+                  }
+                  return delay;
+                },
+            },
+            scales: {
+              x: {
+                stacked: true,
+              },
+              y: {
+                stacked: true
+              }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'The Number of Patents Per Category'
+                },
+                legend: {
+                    display: false
+                }
+            }
         }
     });
-    
+
     // Pie Chart
     const myPieChart = new Chart(pieCtx, {
         type: 'pie',
         data: {
             labels: chart_data.center_labels,
             datasets: [{
-                label: 'Pie Chart', 
                 data: chart_data.num_patents_per_center,
                 backgroundColor: chart_data.colors_for_pie,
-                hoverOffset: 4 
+                hoverOffset: 4
             }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'The Number of Patents Per NASA Center'
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
         }
     });
-};
+}, 300) // renderCharts();
+
 
 /**
  * Parses data for charts via pulling data from /fetch_results
  * @returns { Object } object of arrays
- */ 
+ */
 async function parseDataforCharts() {
     const results = await fetch('/fetch_results');
     const data = await results.text();
@@ -61,7 +102,7 @@ async function parseDataforCharts() {
             catagory_lables.push(element.category);
             num_patents_per_category.push(element.count);
             colors_for_bar.push(generateRandomColors());
-            
+
             // console.log(element.category, element.count);
         } else {
             center_labels.push(element.center);
@@ -69,14 +110,14 @@ async function parseDataforCharts() {
             colors_for_pie.push(generateRandomColors());
         }
     });
-    return { catagory_lables, num_patents_per_category, colors_for_bar, 
+    return { catagory_lables, num_patents_per_category, colors_for_bar,
         center_labels, num_patents_per_center, colors_for_pie };
 };
 
 
 /**
  * Randomly generates rgb string
- * @returns {string} string of rgb 
+ * @returns {string} string of rgb
  */
 
 function generateRandomColors() {
