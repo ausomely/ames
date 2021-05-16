@@ -23,6 +23,12 @@ Install the neccessary dependencies via npm:
 ```
 $ npm install
 ```
+To start the server-side interface use the command:
+```
+$ npm start
+```
+This will run the script 'nodemon server.js' which will begin the web browser nodejs server. To restart the server via command line, simply type 'rs' followed by the enter key. 
+Navigate to https://localhost:3000 to view the web application.
 
 
 
